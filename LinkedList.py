@@ -1,4 +1,3 @@
-
 #The Node class is used as the objects for each element in the Linked list
 # It keeps track of what value each node holds and what the nextNode in the list
 class Node():
@@ -23,13 +22,11 @@ class LinkedList():
             n.nextNode = self.firstNode #Adds node to the list, attaching at front.
             self.firstNode = n          #Makes new node the first node
             n.valueOfNode = valueOfNode #sets the value of the new node
-
         else:
             n = Node(valueOfNode, self.firstNode)
             n.nextNode = self.firstNode
             self.firstNode = n
             n.valueOfNode = valueOfNode
-
 
     def TraverseToLastNode(self):   #This function is used to add nodes to the end in AddToEnd()
         n = self.firstNode

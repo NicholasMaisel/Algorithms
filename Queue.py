@@ -5,15 +5,13 @@ class Queue(LinkedList):
     def __init__(self):
         self.head = None
         self.tail = None
-### HOW DO I CHECK TO SEE IF QUEUE IS EMPTY
+
     def isEmpty(self):
         if self.head == None and self.tail == None:
             empty = True
         else:
             empty = False
         return(empty)
-
-
 
     def enqueue(self,valueOfNode):
         #If the linkedlist is empty this makes the head and tail equal to the new node

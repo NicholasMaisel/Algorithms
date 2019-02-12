@@ -26,12 +26,6 @@ def isPalindrome(magicitems):
         if palindrome:
             print(item, " Plaindrome =", palindrome)
 
-
-
-
-
-
-
 f = open('/Users/nicholasmaisel/Documents/Programming/Algorithms/magicitems.txt',"r")
 magicitems = list(f)
 f.close
