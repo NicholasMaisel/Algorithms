@@ -46,20 +46,3 @@ class LinkedList():
             last = self.TraverseToLastNode()    #This finds the last node so we can update nextNode of the last Node
             n = Node(valueOfNode,None)
             last.nextNode = n
-
-
-'''
-f = open('/Users/nicholasmaisel/Documents/Programming/Algorithms/magicitems.py',"r")
-lines = list(f)
-f.close
-
-a = LinkedList(None)
-for i in lines:
-    a.AddToEnd(i)
-    print(i)
-
-print(a.firstNode.nextNode)
-
-while a.firstNode != None:
-    print('###',a.firstNode.valueOfNode)
-    a.firstNode = a.firstNode.nextNode'''
