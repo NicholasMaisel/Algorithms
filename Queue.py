@@ -24,34 +24,36 @@ class Queue(LinkedList):
         else:
             #if the linkedlist already has a node(s) you want to add to the tail
             n = Node(valueOfNode,None)
-            self.tail.nextNode = n
+            self.tail.nextNode = n      # Adds to list
             self.tail = n
 
     def dequeue(self):
         if self.isEmpty():
-            return(None)
-            return(nodeToDequeue)
+            return(None)    #prevents an error if list is empty
         else:
-            nodeToDequeue = self.head
-            if self.head.nextNode == None:
-                self.head,self.tail = None,None
+            nodeToDequeue = self.head   #saves a copy of the node to dequeue
+            if self.head.nextNode == None:  # checks if it is at end of list
+                self.head,self.tail = None,None #resets list to empty if last node
             else:
-                self.head = self.head.nextNode
+                self.head = self.head.nextNode  #moves forward to next node
             return(nodeToDequeue)
 
     def peek(self):
-        return(self.head.val)
+        return(self.head.value) #shows the value of the next node to be dequeued
 
 
 
+
+f = open('/Users/nicholasmaisel/Documents/Programming/Algorithms/magicitems.py',"r")
+lines = list(f)
+f.close
 
 a = Queue()
-a.enqueue("John")
-a.enqueue("Mitchell")
-a.enqueue("laney")
-a.enqueue("Dane")
-a.enqueue("hellothere")
+for i in lines:
+    a.enqueue(i)
+    print(i)
 
-for i in range(0,5):
-    print(a.dequeue().val, "##")
-    i+= 1
+print(a.head.nextNode)
+
+while a.head != None:
+    print(a.dequeue().valueOfNode)
