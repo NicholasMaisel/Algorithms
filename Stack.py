@@ -6,33 +6,43 @@ class Stack(LinkedList):        #this inherits the Node class
         self.top = None
         self.firstNode = None
 
+#The isEmpty function is used to make sure, before the linkedlist is edited
+#that the edit will cause no errors.
     def isEmpty(self):
-        if self.firstNode:
+        if self.top:
             empty = False
         else:
             empty = True
-        return(empty)
+            return(empty)
 
     def push(self,valueOfNode):
         if self.isEmpty():
-            n = Node(valueOfNode,None)
-            self.firstNode = n
-            self.top = n
+            n = Node(valueOfNode,None) #Creates a new node to be pushed
+            n.nextNode = self.top      #links the new node to the list
+            self.top = n               #Makes the new node the top of list for LIFO
         else:
             n = Node(valueOfNode,None)
-            self.top.nextNode = n
+            n.nextNode = self.top
             self.top = n
-
-    def TraverseToNewTop(self):
-        n = self.firstNode
-        while(n.nextNode != self.top):
-            n = n.nextNode
-        return(n)
 
 
     def pop(self):
-        if not self.isEmpty():
-            nodeToBePopped = self.top
-            self.top = self.TraverseToNewTop() # Sets the new top
-            self.top.nextNode = None      # Sets the top nextNode val to None
+        if not self.isEmpty():         # Ensures an empty list isnt popped
+            nodeToBePopped = self.top  # Makes a copy of the node to return
+            self.top = self.top.nextNode   # Remove node from list by moving up
             return(nodeToBePopped)
+
+
+f = open('/Users/nicholasmaisel/Documents/Programming/Algorithms/magicitems.py',"r")
+lines = list(f)
+f.close
+
+a = Stack()
+for i in lines:
+    a.push(i)
+    print(i)
+
+
+
+while a.top != None:
+    print('###',a.pop())
