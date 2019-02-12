@@ -31,18 +31,3 @@ class Stack(LinkedList):        #this inherits the Node class
             nodeToBePopped = self.top  # Makes a copy of the node to return
             self.top = self.top.nextNode   # Remove node from list by moving up
             return(nodeToBePopped)
-
-'''
-f = open('/Users/nicholasmaisel/Documents/Programming/Algorithms/magicitems.py',"r")
-lines = list(f)
-f.close
-
-a = Stack()
-for i in lines:
-    a.push(i)
-    print(i)
-
-
-
-while a.top != None:
-    print('###',a.pop().valueOfNode)'''
