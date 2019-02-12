@@ -40,19 +40,3 @@ class Queue(LinkedList):
 
     def peek(self):
         return(self.head.value) #shows the value of the next node to be dequeued
-
-
-'''
-f = open('/Users/nicholasmaisel/Documents/Programming/Algorithms/magicitems.py',"r")
-lines = list(f)
-f.close
-
-a = Queue()
-for i in lines:
-    a.enqueue(i)
-    print(i)
-
-print(a.head.nextNode)
-
-while a.head != None:
-    print(a.dequeue().valueOfNode)'''
