@@ -14,7 +14,7 @@ class Stack(LinkedList):        #this inherits the Node class
         return(empty)
 
     def push(self,valueOfNode):
-        if isEmpty():
+        if self.isEmpty():
             n = Node(valueOfNode,None)
             self.firstNode = n
             self.top = n
@@ -32,11 +32,7 @@ class Stack(LinkedList):        #this inherits the Node class
 
     def pop(self):
         if not self.isEmpty():
-            poppedNode = N.top
-            self.top = TraverseToNewTop()
-            self.top.nextNode = None
-            return(poppedNode)
-
-
-a = Stack()
-a.push("")
+            nodeToBePopped = self.top
+            self.top = self.TraverseToNewTop() # Sets the new top
+            self.top.nextNode = None      # Sets the top nextNode val to None
+            return(nodeToBePopped)
