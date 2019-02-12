@@ -42,8 +42,7 @@ class Queue(LinkedList):
         return(self.head.value) #shows the value of the next node to be dequeued
 
 
-
-
+'''
 f = open('/Users/nicholasmaisel/Documents/Programming/Algorithms/magicitems.py',"r")
 lines = list(f)
 f.close
@@ -56,4 +55,4 @@ for i in lines:
 print(a.head.nextNode)
 
 while a.head != None:
-    print(a.dequeue().valueOfNode)
+    print(a.dequeue().valueOfNode)'''
