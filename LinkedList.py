@@ -21,12 +21,10 @@ class LinkedList():
             n = Node(valueOfNode, None) #Creates new node to be added to list.
             n.nextNode = self.firstNode #Adds node to the list, attaching at front.
             self.firstNode = n          #Makes new node the first node
-            n.valueOfNode = valueOfNode #sets the value of the new node
         else:
             n = Node(valueOfNode, self.firstNode)
             n.nextNode = self.firstNode
             self.firstNode = n
-            n.valueOfNode = valueOfNode
 
     def TraverseToLastNode(self):   #This function is used to add nodes to the end in AddToEnd()
         n = self.firstNode
@@ -38,7 +36,6 @@ class LinkedList():
         if self.isEmpty():
             n = Node(valueOfNode, None)
             self.firstNode = n
-            n.valueOfNode = valueOfNode
         else:
             last = self.TraverseToLastNode()    #This finds the last node so we can update nextNode of the last Node
             n = Node(valueOfNode,None)
