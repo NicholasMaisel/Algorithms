@@ -48,7 +48,7 @@ class LinkedList():
             last.nextNode = n
 
 
-
+'''
 f = open('/Users/nicholasmaisel/Documents/Programming/Algorithms/magicitems.py',"r")
 lines = list(f)
 f.close
@@ -62,4 +62,4 @@ print(a.firstNode.nextNode)
 
 while a.firstNode != None:
     print('###',a.firstNode.valueOfNode)
-    a.firstNode = a.firstNode.nextNode
+    a.firstNode = a.firstNode.nextNode'''
