@@ -1,41 +1,33 @@
 class Node():
-    def __init__(self,val,nextNode):
-        self.val = val
+    def __init__(self,valueOfNode,nextNode):
+        self.valueOfNode = valueOfNode
         self.nextNode = nextNode
 
 class LinkedList():
-    def __init__(self,name,firstNode):
-        self.name = name
+    def __init__(self,firstNode):
         self.firstNode = firstNode
 
-    def AddToFront(self,val):
-        n = Node(val, self.firstNode)
+    def AddToFront(self,valueOfNode):
+        n = Node(valueOfNode, self.firstNode)
         self.firstNode = n
-        n.val = val
+        n.valueOfNode = valueOfNode
 
-    def TraverseToLastNode(self):
+    def TraverseToLastNode(self):   #This function is used to add nodes to the end in AddToEnd()
         n = self.firstNode
         while(n.nextNode):
             n = n.nextNode
         return(n)
 
-    def AddToEnd(self,val):
-        last = self.TraverseToLastNode()
-        n = Node(val,None)
+    def AddToEnd(self,valueOfNode):
+        last = self.TraverseToLastNode()    #This finds the last node so we can update nextNode of the last Node
+        n = Node(valueOfNode,None)
         last.nextNode = n
 
+    def isEmpty(self):
+        if self.firstNode:
+            empty = False
+        else:
+            empty = True
+        return(empty)
 
-def main():
-    myList = LinkedList("myList",None)
-    myList.AddToFront("Mitchell")
-    myList.AddToEnd("Nicholas")
-    myList.AddToFront("Laney")
-    myList.AddToFront("Dane")
-    myList.AddToEnd("Sheila")
-
-    currentNode = myList.firstNode
-
-    while currentNode:
-        print(currentNode.val)
-        currentNode = currentNode.nextNode
-main()
+f = open(sasda)
