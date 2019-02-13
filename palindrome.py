@@ -14,7 +14,6 @@ def isPalindrome(magicitems):
         for letter in item:
             a.enqueue(letter)
             b.push(letter)
-            palindrome = True
 
         while not b.isEmpty() and not a.isEmpty():
             x = b.pop().valueOfNode
