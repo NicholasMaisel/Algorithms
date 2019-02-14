@@ -4,7 +4,7 @@ from LinkedList import LinkedList
 class Stack(LinkedList):        #this inherits the Node class
     def __init__(self):
         self.top = None
-        self.firstNode = None
+
 
 #The isEmpty function is used to make sure, before the linkedlist is edited
 #that the edit will cause no errors.
