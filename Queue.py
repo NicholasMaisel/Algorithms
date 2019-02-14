@@ -37,4 +37,4 @@ class Queue(LinkedList):
             return(nodeToDequeue)
 
     def peek(self):
-        return(self.head.value) #shows the value of the next node to be dequeued
+        return(self.head.valueOfNode) #shows the value of the next node to be dequeued
