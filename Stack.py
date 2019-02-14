@@ -17,8 +17,8 @@ class Stack(LinkedList):        #this inherits the Node class
 
     def push(self,valueOfNode):
         if self.isEmpty():
-            n = Node(valueOfNode,None) #Creates a new node to be pushed
-            n.nextNode = self.top      #links the new node to the list
+            #Creates a new node to be pushed and attaches it to list with next node
+            n = Node(valueOfNode,self.top)
             self.top = n               #Makes the new node the top of list for LIFO
         else:
             n = Node(valueOfNode,None)
