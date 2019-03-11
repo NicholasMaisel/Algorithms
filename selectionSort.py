@@ -1,29 +1,40 @@
-# A = read()
-
 def swap(Arr, j, smallPosition):
     tempVar = Arr[j]
     Arr[j] = Arr[smallPosition]
     Arr[smallPosition] = tempVar
     return(Arr)
 
-
 def selectionSort(A):
     n = len(A)
     j = 0
-    for j in range(j, n-2):
+    for j in range(j, n-1):
         smallPos = j
         for x in range(j+1, n):
             if A[x] < A[smallPos]:
                 smallPos = x
-                print("smallPos = ",smallPos)
         A = swap(A,j,smallPos)
     return(A)
 
 
+
+
+
+
+
 def main():
-    a = [1,3,5,2,4,2,4553,234,2355,262,342,245234,2245,23523,52]
-    selectionSort(a)
-    print(a)
+
+    #Reads magicitems file
+    f = open('magicitems.txt',"r")
+    magicitems = list(f)
+    f.close
+    magicitems = [x.strip() for x in magicitems]
+    magicitems = [x.lower() for x in magicitems]
+    magicitems = [x.replace(' ','') for x in magicitems]
+
+    a = magicitems
+    a = selectionSort(a)
+    for i in a:
+        print(i)
 
 
 main()
