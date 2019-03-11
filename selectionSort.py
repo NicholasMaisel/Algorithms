@@ -20,7 +20,49 @@ def selectionSort(A):
     return(A,comparisons)       # Returns tuple of the sorted list and # of comps
 
 
-def mergeSort
+def mergeSort(A):
+    comparisons = 0
+    n = len(A)
+    if (n <= 1):
+        return(A,comparisons)
+    splitPoint = int(n/2)
+    left = mergeSort(A[:splitPoint])
+    right = mergeSort(A[splitPoint:])
+
+    i = j = k = 0
+
+    while i < len(left) and j < len(right):
+        if left[i] < right[j]:
+            print("i= ",i,"j= ",j,"k= ",k)
+            A[k] = left[i]
+            i += 1
+        else:
+            print("i= ",i,"j= ",j,"k= ",k)
+            A[k] = right[j]
+            j +=1
+        k +=1
+
+        while i < len(left):
+            print("i= ",i,"j= ",j,"k= ",k)
+            A[k] = left[i]
+            i+=1
+            k+=1
+        while j < len(right):
+            print("i= ",i,"j= ",j,"k= ",k)
+            A[k] = right[i]
+            j +=1
+            k +=1
+
+    return(A)
+
+
+
+def insertionSort(A):
+    pass
+
+
+def quickSort(A):
+    pass
 
 
 
@@ -36,10 +78,10 @@ def main():
     magicitems = [x.replace(' ','') for x in magicitems]
 
     a = magicitems
-    a,comparisonCount = selectionSort(a)
+    a = mergeSort(a)
     for i in a:
         print(i)
-    print("Comparisons: ", comparisonCount)
+    #print("Comparisons: ", comparisonCount)
 
 
 main()
