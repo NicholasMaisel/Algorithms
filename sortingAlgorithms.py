@@ -19,39 +19,33 @@ def selectionSort(A):
         A = swap(A,j,smallPos)  # Calls the swap function
     return(A,comparisons)       # Returns tuple of the sorted list and # of comps
 
-
-
 def merge(left, right):
     tempArr = []
     #Makes sure there the elements are not 1 in length (they would already)
     #be sorted
-    while(len(left) >= 1 and len(right) >= 1):
-        print(left)
-        print(right)
+    while(len(left) > 1 and len(right) > 1):
         if (left[0] > right[0]):
+            print("in 1")
             tempArr.append(right[0])
             right = right[1:]
         else:
             tempArr.append(left[0])
-            print("k")
             left = left[:1]
     while(len(left) >= 1):
+        print("in 2")
         tempArr.append(left[0])
         left = left[1:]
 
     while(len(right) >= 1):
+        print("in 3")
         tempArr.append(right[0])
         right = right[1:]
 
     return(tempArr)
 
-
-
-
 def mergeSort(A):
     comparisons = 0
     n = len(A)
-    print(n)
     if (n <= 1):
         return(A)
     splitPoint = int(n/2)
@@ -60,18 +54,21 @@ def mergeSort(A):
 
     return(merge(left,right))
 
-
-
-
 def insertionSort(A):
-    pass
-
+    for i in range(0,len(A)):
+        key = A[i]
+        j = i-1
+        while j>=0 and key < A[j]:
+        #this 'waits' until the item is located at a place
+        #that the value before it is less than the value
+        #after it and inserts the key value at a[j+1]
+            A[j+1] = A[j]
+            j -= 1
+            A[j+1] = key #inserts the value
+    return(A)
 
 def quickSort(A):
     pass
-
-
-
 
 def main():
 
@@ -84,7 +81,7 @@ def main():
     magicitems = [x.replace(' ','') for x in magicitems]
 
     a = magicitems
-    a = mergeSort(a)
+    a = insertionSort(a)
     for i in a:
         print(i)
     #print("Comparisons: ", comparisonCount)
