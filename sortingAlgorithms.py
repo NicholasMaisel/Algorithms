@@ -1,7 +1,8 @@
-def swap(Arr, j, smallPosition):
-    tempVar = Arr[j]
-    Arr[j] = Arr[smallPosition]
-    Arr[smallPosition] = tempVar
+from random import random
+
+def swap(Arr, i, j):
+    Arr[i] = Arr[j]
+    Arr[j] = Arr[i]
     return(Arr)
 
 def selectionSort(A):
@@ -33,7 +34,6 @@ def merge(left, right):
     sortedList+=left[i:]
     sortedList+=right[j:]
     return sortedList
-
 def mergeSort(A):
     comparisons = 0
     n = len(A)
@@ -44,8 +44,6 @@ def mergeSort(A):
     right = mergeSort(A[splitPoint:])
 
     return(merge1(left,right))
-
-
 
 def insertionSort(A):
     for i in range(0,len(A)):
@@ -60,8 +58,25 @@ def insertionSort(A):
             A[j+1] = key #inserts the value
     return(A)
 
-def quickSort(A):
-    pass
+#The partition method is used to sort the sub arrays in place
+def partition(A, left, right):
+    i = left-1
+    for j in range(left, right): #Iterates over each value in sub array
+        if A[j] <= A[right]:
+            i += 1
+            A[j], A[i] = A[i], A[j]
+    A[i+1], A[right] = A[right], A[i+1]
+    return i+1
+
+def quickSort(A, left, right):
+    if left < right:
+        pivot = partition(A, left, right)
+        quickSort(A, left, pivot-1)
+        quickSort(A, pivot+1, right)
+    return(A)
+
+
+
 
 def main():
 
@@ -74,7 +89,7 @@ def main():
     magicitems = [x.replace(' ','') for x in magicitems]
 
     a = magicitems
-    a = mergeSort(a)
+    a = quickSort(a,0,len(a)-1)
     for i in a:
         print(i)
     #print("Comparisons: ", comparisonCount)
