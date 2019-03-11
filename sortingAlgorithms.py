@@ -19,29 +19,49 @@ def selectionSort(A):
         A = swap(A,j,smallPos)  # Calls the swap function
     return(A,comparisons)       # Returns tuple of the sorted list and # of comps
 
-def merge(left, right):
+def merge1(left, right):
     tempArr = []
     #Makes sure there the elements are not 1 in length (they would already)
     #be sorted
     while(len(left) > 1 and len(right) > 1):
         if (left[0] > right[0]):
-            print("in 1")
             tempArr.append(right[0])
             right = right[1:]
         else:
             tempArr.append(left[0])
             left = left[:1]
     while(len(left) >= 1):
-        print("in 2")
         tempArr.append(left[0])
         left = left[1:]
 
     while(len(right) >= 1):
-        print("in 3")
         tempArr.append(right[0])
         right = right[1:]
 
     return(tempArr)
+
+# Merge1 A -> Array
+#        p -> Start index of subarray to sort
+#        q -> SplitPoint
+#        r -> end index of subarray to sort
+def merge(A,p,q,r):
+    n1 = q-p+1
+    n2 = r-q
+    left,right = [],[]
+    for i in range(0,n1):
+        left[i] = A[p+i-1]
+    for j in range(0,n2):
+        right[j] = A[q+j]
+    i = 1
+    j = 1
+    for k in range(p,r):
+        if left[i] <= right[i]:
+            A[k] = L[i]
+            i =i+1
+        else:
+            A[k] = right[j]
+            j = j+1
+
 
 def mergeSort(A):
     comparisons = 0
@@ -53,6 +73,8 @@ def mergeSort(A):
     right = mergeSort(A[splitPoint:])
 
     return(merge(left,right))
+
+
 
 def insertionSort(A):
     for i in range(0,len(A)):
@@ -88,3 +110,7 @@ def main():
 
 
 main()
+
+
+import random
+random.random()*666
