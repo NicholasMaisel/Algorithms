@@ -19,49 +19,20 @@ def selectionSort(A):
         A = swap(A,j,smallPos)  # Calls the swap function
     return(A,comparisons)       # Returns tuple of the sorted list and # of comps
 
-def merge1(left, right):
-    tempArr = []
-    #Makes sure there the elements are not 1 in length (they would already)
-    #be sorted
-    while(len(left) > 1 and len(right) > 1):
-        if (left[0] > right[0]):
-            tempArr.append(right[0])
-            right = right[1:]
+def merge(left, right):
+    sortedList=[] #array to store the sorted list
+    i,j=0,0
+    while i<len(left) and j<len(right): # ensures we dont go out of list
+        if left[i] < right[j]:          # comparint the unitary lists
+            sortedList.append(left[i])
+            i+=1                        #Moves to next element in list
         else:
-            tempArr.append(left[0])
-            left = left[:1]
-    while(len(left) >= 1):
-        tempArr.append(left[0])
-        left = left[1:]
+            sortedList.append(right[j])
+            j+=1
 
-    while(len(right) >= 1):
-        tempArr.append(right[0])
-        right = right[1:]
-
-    return(tempArr)
-
-# Merge1 A -> Array
-#        p -> Start index of subarray to sort
-#        q -> SplitPoint
-#        r -> end index of subarray to sort
-def merge(A,p,q,r):
-    n1 = q-p+1
-    n2 = r-q
-    left,right = [],[]
-    for i in range(0,n1):
-        left[i] = A[p+i-1]
-    for j in range(0,n2):
-        right[j] = A[q+j]
-    i = 1
-    j = 1
-    for k in range(p,r):
-        if left[i] <= right[i]:
-            A[k] = L[i]
-            i =i+1
-        else:
-            A[k] = right[j]
-            j = j+1
-
+    sortedList+=left[i:]
+    sortedList+=right[j:]
+    return sortedList
 
 def mergeSort(A):
     comparisons = 0
@@ -72,7 +43,7 @@ def mergeSort(A):
     left = mergeSort(A[:splitPoint])
     right = mergeSort(A[splitPoint:])
 
-    return(merge(left,right))
+    return(merge1(left,right))
 
 
 
@@ -90,7 +61,7 @@ def insertionSort(A):
     return(A)
 
 def quickSort(A):
-
+    pass
 
 def main():
 
@@ -103,14 +74,10 @@ def main():
     magicitems = [x.replace(' ','') for x in magicitems]
 
     a = magicitems
-    a = insertionSort(a)
+    a = mergeSort(a)
     for i in a:
         print(i)
     #print("Comparisons: ", comparisonCount)
 
 
 main()
-
-
-import random
-random.random()*666
