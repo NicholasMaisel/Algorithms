@@ -68,7 +68,7 @@ def insertionSort(A):
     return(A)
 
 def quickSort(A):
-    pass
+
 
 def main():
 
