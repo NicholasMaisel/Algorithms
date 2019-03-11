@@ -20,40 +20,46 @@ def selectionSort(A):
     return(A,comparisons)       # Returns tuple of the sorted list and # of comps
 
 
+
+def merge(left, right):
+    tempArr = []
+    #Makes sure there the elements are not 1 in length (they would already)
+    #be sorted
+    while(len(left) >= 1 and len(right) >= 1):
+        print(left)
+        print(right)
+        if (left[0] > right[0]):
+            tempArr.append(right[0])
+            right = right[1:]
+        else:
+            tempArr.append(left[0])
+            print("k")
+            left = left[:1]
+    while(len(left) >= 1):
+        tempArr.append(left[0])
+        left = left[1:]
+
+    while(len(right) >= 1):
+        tempArr.append(right[0])
+        right = right[1:]
+
+    return(tempArr)
+
+
+
+
 def mergeSort(A):
     comparisons = 0
     n = len(A)
+    print(n)
     if (n <= 1):
-        return(A,comparisons)
+        return(A)
     splitPoint = int(n/2)
     left = mergeSort(A[:splitPoint])
     right = mergeSort(A[splitPoint:])
 
-    i = j = k = 0
+    return(merge(left,right))
 
-    while i < len(left) and j < len(right):
-        if left[i] < right[j]:
-            print("i= ",i,"j= ",j,"k= ",k)
-            A[k] = left[i]
-            i += 1
-        else:
-            print("i= ",i,"j= ",j,"k= ",k)
-            A[k] = right[j]
-            j +=1
-        k +=1
-
-        while i < len(left):
-            print("i= ",i,"j= ",j,"k= ",k)
-            A[k] = left[i]
-            i+=1
-            k+=1
-        while j < len(right):
-            print("i= ",i,"j= ",j,"k= ",k)
-            A[k] = right[i]
-            j +=1
-            k +=1
-
-    return(A)
 
 
 
