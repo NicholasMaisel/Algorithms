@@ -1,8 +1,9 @@
 from random import random
 
-def swap(Arr, i, j):
-    Arr[i] = Arr[j]
+def swap(Arr, j, i):
+    tempVar = Arr[j]
     Arr[j] = Arr[i]
+    Arr[i] = tempVar
     return(Arr)
 
 def selectionSort(A):
@@ -43,7 +44,7 @@ def mergeSort(A):
     left = mergeSort(A[:splitPoint])
     right = mergeSort(A[splitPoint:])
 
-    return(merge1(left,right))
+    return(merge(left,right))
 
 def insertionSort(A):
     for i in range(0,len(A)):
@@ -78,6 +79,7 @@ def quickSort(A, left, right):
 
 
 
+
 def main():
 
     #Reads magicitems file
@@ -90,6 +92,7 @@ def main():
 
     a = magicitems
     a = quickSort(a,0,len(a)-1)
+    #a = insertionSort(a)
     for i in a:
         print(i)
     #print("Comparisons: ", comparisonCount)
