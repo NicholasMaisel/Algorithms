@@ -24,13 +24,6 @@ def mergeSort
 
 
 
-'''
-For the comparison count, I am getting 221,445 comparisons. We learned that
-selection sort operates at O(n^2). Am i counting all comparisons?
-Am i missing anything?'''
-
-
-
 
 def main():
 
