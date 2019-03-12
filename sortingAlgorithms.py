@@ -14,14 +14,12 @@ def selectionSort(A):
         smallPos = j
         for x in range(j+1, n):
             #increments comparisons each time one is done, it is before the
-            # inequality, because the inequality may not always be true.
+            #inequality, because the inequality may not always be true.
             comparisons += 1
             if A[x] < A[smallPos]:
                 smallPos = x
         A = swap(A,j,smallPos)  # Calls the swap function
     return(A,comparisons)       # Returns tuple of the sorted list and # of comps
-
-
 
 def merge(left, right):
     sortedList=[] #array to store the sorted list
@@ -36,7 +34,7 @@ def merge(left, right):
 
     sortedList+=left[i:]
     sortedList+=right[j:]
-    return sortedList
+    return (sortedList, comparisons) #tupe of the list and the number of comps
 
 def mergeSort(A):
     comparisons = 0
