@@ -1,8 +1,8 @@
 from random import random
 
 def linearSearch(A, target):
-    location = 0
-    while location < len(A):
+    location = 0             # Location *is* the comparison count in this instance
+    while location < len(A): #COMP
         if A[location] == target:
             flag = True
             break
@@ -14,23 +14,22 @@ def linearSearch(A, target):
         location = -1
     return(flag,location)
 
+
 def binarySearch(A,start,stop,target):
     flag = False
     midpoint = int((start + stop)/2)
-    if start > stop:
+    if start > stop:                #COMP
         flag = False
         location = -1
-    elif (A[midpoint] == target):
+    elif (A[midpoint] == target):   #COMP
         flag = True
         location = midpoint
-    elif (target < midpoint):
+    elif (target < midpoint):       #COMP
         binarySearch(A,start, midpoint-1, target)
     else:
         binarySearch(A, midpoint+1,stop,target)
 
     return(flag,midpoint)
-
-
 
 
 
