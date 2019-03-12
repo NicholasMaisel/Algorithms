@@ -37,7 +37,6 @@ def merge(left, right):
     return (sortedList, comparisons) #tupe of the list and the number of comps
 
 def mergeSort(A):
-    comparisons = 0
     n = len(A)
     if (n <= 1):
         return(A)
@@ -49,17 +48,19 @@ def mergeSort(A):
 
 
 def insertionSort(A):
+    comparisons = 0
     for i in range(0,len(A)):
         key = A[i]
         j = i-1
         while j>=0 and key < A[j]:
+            comparisons +=1
         #this 'waits' until the item is located at a place
         #that the value before it is less than the value
         #after it and inserts the key value at a[j+1]
             A[j+1] = A[j]
             j -= 1
             A[j+1] = key #inserts the value
-    return(A)
+    return(A, comparisons)
 
 #The partition method is used to sort the sub arrays in place
 def partition(A, left, right):
@@ -91,7 +92,7 @@ def main():
 
     a = magicitems
     #a = quickSort(a,0,len(a)-1)
-    a, comparisonCount = selectionSort(a)
+    a, comparisonCount = insertionSort(a)
     print(a)
     print("Comparisons: ", comparisonCount)
 
