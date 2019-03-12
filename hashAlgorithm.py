@@ -1,4 +1,5 @@
-import LinkedList
+from LinkedList import LinkedList
+from LinkedList import Node
 
 ARRAY_LENGTH = 255
 
@@ -8,42 +9,65 @@ class HashTable():
         self.chainLength = chainLength
         self.table = {}
 
-    def hash(key):
-        return(key%chainLength)
+    def hash(self,key):
+        #Uses python's built in hash tool to and modding it to chainlength
+        return(hash(key)%self.chainLength)
 
-    def get(key):
+    def get(self,key):
         flag = False
         hashedKey = self.hash(key)
         #See if hash table has a value at hashed index
-        if hashedKey in self.table.values:
+        if hashedKey in self.table.keys():
             selectedLList  = self.table[self.hash(key)] #grabs the linked list to search for element.
-            if selectedLList.firstNode.valueOfNode == key:
+            if selectedLList.firstNode == key:  #COMP?
                 return(key)
             else:
+                comparisons +=1
                 curNode = selectedLList.firstNode.nextNode
                 # Runs thru the linked list checking if curNode.valueOfNode = key
-                while curNode.ValueOfNode != key:
+                while curNode != key:
                     if curNode.nextNode: #If the current node has a next node, set CurNode equal to it
                         curNode = curNode.nextNode
                     else:
                         break   #if there isnt a next node break out and move on
-                if curNode.valueOfNode == key: #ensures that the curNodes value is the value we are looking for
+                if curNode == key: #ensures that the curNodes value is the value we are looking for
                     flag = True
         else:
             flag = False
 
-        return(flag)
+        return(flag, comparisons)
 
-    def put(key):
+
+    def put(self,key):
         hashedKey = self.hash(key)
-        if hashedKey in self.table.values:
-            self.table[hashedKey].addToFront(key)
+        if hashedKey in self.table.keys(): #Checks to see if the hash has been used
+            self.table[hashedKey].AddToFront(key)
         else:
             #If there is not already a value mapped to this hash output's
             #Linked list, simply make one and set the key to the value of that
             #linked lists's firstNode value
-            selt.table[hashedKey] = LinkedList(key)
+            self.table[hashedKey] = LinkedList(key)
+
 
 
 def main():
-    myHashTable = HashTable(ARRAY_LENGTH)
+    b = HashTable(255)
+    f = open('/Users/nicholasmaisel/Documents/Programming/Algorithms/magicitems.txt',"r")
+    magicitems = list(f)
+    f.close
+    magicitems = [x.strip() for x in magicitems]
+    magicitems = [x.lower() for x in magicitems]
+    magicitems = [x.replace(' ','') for x in magicitems]
+
+    a = magicitems
+
+    #a = insertionSort(a)
+    for i in a:
+        b.put(i)
+
+    print(b.table)
+
+
+
+
+main()
