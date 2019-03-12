@@ -1,5 +1,6 @@
 from LinkedList import LinkedList
 from LinkedList import Node
+import random
 
 ARRAY_LENGTH = 255
 
@@ -13,7 +14,9 @@ class HashTable():
         #Uses python's built in hash tool to and modding it to chainlength
         return(hash(key)%self.chainLength)
 
+
     def get(self,key):
+        comparisons = 0
         flag = False
         hashedKey = self.hash(key)
         #See if hash table has a value at hashed index
@@ -26,7 +29,7 @@ class HashTable():
                 curNode = selectedLList.firstNode.nextNode
                 # Runs thru the linked list checking if curNode.valueOfNode = key
                 while curNode != key:
-                    if curNode.nextNode: #If the current node has a next node, set CurNode equal to it
+                    if curNode.nextNode != None: #If the current node has a next node, set CurNode equal to it
                         curNode = curNode.nextNode
                     else:
                         break   #if there isnt a next node break out and move on
@@ -36,7 +39,6 @@ class HashTable():
             flag = False
 
         return(flag, comparisons)
-
 
     def put(self,key):
         hashedKey = self.hash(key)
@@ -61,11 +63,22 @@ def main():
 
     a = magicitems
 
-    #a = insertionSort(a)
     for i in a:
         b.put(i)
 
-    print(b.table)
+
+
+
+    TOTALCOMP = 0
+
+    for i in range(100):
+        rng = round(random.random()*255)
+        print(rng)
+        l, comparisons = b.get(list(b.table.keys())[rng])
+        TOTALCOMP += comparisons
+
+    print(TOTALCOMP/100)
+
 
 
 
