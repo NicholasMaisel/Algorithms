@@ -21,6 +21,8 @@ def selectionSort(A):
         A = swap(A,j,smallPos)  # Calls the swap function
     return(A,comparisons)       # Returns tuple of the sorted list and # of comps
 
+
+
 def merge(left, right):
     sortedList=[] #array to store the sorted list
     i,j=0,0
@@ -35,6 +37,7 @@ def merge(left, right):
     sortedList+=left[i:]
     sortedList+=right[j:]
     return sortedList
+
 def mergeSort(A):
     comparisons = 0
     n = len(A)
@@ -45,6 +48,7 @@ def mergeSort(A):
     right = mergeSort(A[splitPoint:])
 
     return(merge(left,right))
+
 
 def insertionSort(A):
     for i in range(0,len(A)):
@@ -77,13 +81,10 @@ def quickSort(A, left, right):
     return(A)
 
 
-
-
-
 def main():
 
     #Reads magicitems file
-    f = open('magicitems.txt',"r")
+    f = open('/Users/nicholasmaisel/Documents/Programming/Algorithms/magicitems.txt',"r")
     magicitems = list(f)
     f.close
     magicitems = [x.strip() for x in magicitems]
@@ -91,11 +92,10 @@ def main():
     magicitems = [x.replace(' ','') for x in magicitems]
 
     a = magicitems
-    a = quickSort(a,0,len(a)-1)
-    #a = insertionSort(a)
-    for i in a:
-        print(i)
-    #print("Comparisons: ", comparisonCount)
+    #a = quickSort(a,0,len(a)-1)
+    a, comparisonCount = selectionSort(a)
+    print(a)
+    print("Comparisons: ", comparisonCount)
 
 
 main()
