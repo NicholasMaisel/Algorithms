@@ -79,7 +79,7 @@ def partition(A, left, right):
 def quickSort(A, left, right, comparisonCounter):
     if left < right:
         pivot = partition(A, left, right)
-        comparisonCounter += right - left #This is because on line 71 the for loop iterates right-left times
+        comparisonCounter += (right - left) #This is because on line 71 the for loop iterates right-left times
         quickSort(A, left, pivot-1,comparisonCounter)
         quickSort(A, pivot+1, right, comparisonCounter)
     return(A,comparisonCounter)
