@@ -17,8 +17,7 @@ class LinkedList():
         return(empty)
 
     def AddToFront(self,valueOfNode):
-        new_node = Node(valueOfNode)
-        new_node.nextNode = self.firstNode
+        new_node = Node(valueOfNode,self.firstNode)
         self.firstNode = new_node
 
     def TraverseToLastNode(self):   #This function is used to add nodes to the end in AddToEnd()
