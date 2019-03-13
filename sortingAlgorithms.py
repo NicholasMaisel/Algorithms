@@ -1,10 +1,10 @@
 from random import random
 # These variables are used to count the comparisons
 # They are accessed globally in each sort function 
-quickComparisons =1
-mergeComparisons = 1
-selectionComparisons =1
-insertionComparisons = 1
+quickComparisons = 0
+mergeComparisons = 0
+selectionComparisons = 0
+insertionComparisons = 0
 
 def swap(Arr, j, i):
     tempVar = Arr[j]
