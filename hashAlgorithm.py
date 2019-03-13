@@ -13,6 +13,24 @@ class HashTable():
     def hash(self,key):
         #Uses python's built in hash tool to and modding it to chainlength
         return(hash(key)%self.chainLength)
+    
+    
+    def get(self,key):
+        hashedKey = self.hash(key)
+        flag = False
+        
+        #check to see if the key exists in the hash table
+        if hashedKey in self.table.keys():
+            curNode = self.table[hashedKey].firstNode
+            while flag == False:
+                if curNode.valueOfNode == key:
+                    flag = True
+                elif curNode.nextNode:
+                    curNode = curNode.nextNode
+                else:
+                    break
+        return(flag)
+
 
     def put(self,key):
         hashedKey = self.hash(key)
@@ -23,12 +41,13 @@ class HashTable():
             #Linked list, simply make one and set the key to the value of that
             #linked lists's firstNode value
             self.table[hashedKey] = LinkedList(key)
+            
 
 
 
 def main():
     b = HashTable(255)
-    f = open('/Users/nicholasmaisel/Documents/Programming/Algorithms/magicitems.txt',"r")
+    f = open('magicitems.txt',"r")
     magicitems = list(f)
     f.close
     magicitems = [x.strip() for x in magicitems]
