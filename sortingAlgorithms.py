@@ -1,6 +1,5 @@
 from random import random
-COMPARISONS = 0
-
+Comparisons =1          # This variable will be used as a global variable later
 
 def swap(Arr, j, i):
     tempVar = Arr[j]
@@ -65,6 +64,9 @@ def insertionSort(A):
     return(A, comparisons)
 
 #The partition method is used to sort the sub arrays in place
+
+
+
 def partition(A, left, right):
     i = left-1
     for j in range(left, right): #Iterates over each value in sub array
@@ -76,19 +78,22 @@ def partition(A, left, right):
 #The comparisonCounter Variable is used because quickSort is recursive
 #Therefore we cannot initialize the variable as 0, or each recursion it will
 #be overwritten
-def quickSort(A, left, right, comparisonCounter):
+def quickSort(A, left, right):
+    global Comparisons          #used to referenece the global variable comparisons
     if left < right:
         pivot = partition(A, left, right)
-        comparisonCounter += (right - left) #This is because on line 71 the for loop iterates right-left times
-        quickSort(A, left, pivot-1,comparisonCounter)
-        quickSort(A, pivot+1, right, comparisonCounter)
-    return(A,comparisonCounter)
+
+        Comparisons += (right - left)
+        quickSort(A, left, pivot-1)
+        quickSort(A, pivot+1, right)
+    return(A,Comparisons)
+
 
 
 def main():
 
     #Reads magicitems file
-    f = open('/Users/nicholasmaisel/Documents/Programming/Algorithms/magicitems.txt',"r")
+    f = open('magicitems.txt',"r")
     magicitems = list(f)
     f.close
     magicitems = [x.strip() for x in magicitems]
@@ -97,9 +102,9 @@ def main():
 
     a = magicitems
     #a = quickSort(a,0,len(a)-1)
-    a, comparisonCount = quickSort(a,0,len(a)-1, COMPARISONS)
-    print(a)
-    print("Comparisons: ", comparisonCount)
+    a, comparisonCount = quickSort(a,0,len(a)-1)
+
+    print("Comparisons: ", comparisonCount-1)
 
 
 main()
