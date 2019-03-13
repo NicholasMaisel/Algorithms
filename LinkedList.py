@@ -7,7 +7,7 @@ class Node():
 
 class LinkedList():
     def __init__(self,firstNode):
-        self.firstNode = firstNode
+        self.firstNode = Node(firstNode,None)
 
     def isEmpty(self):
         if self.firstNode:
@@ -17,14 +17,9 @@ class LinkedList():
         return(empty)
 
     def AddToFront(self,valueOfNode):
-        if self.isEmpty():
-            n = Node(valueOfNode, None) #Creates new node to be added to list.
-            n.nextNode = self.firstNode #Adds node to the list, attaching at front.
-            self.firstNode = n          #Makes new node the first node
-        else:
-            n = Node(valueOfNode, self.firstNode)
-            n.nextNode = self.firstNode
-            self.firstNode = n
+        new_node = Node(valueOfNode)
+        new_node.nextNode = self.firstNode
+        self.firstNode = new_node
 
     def TraverseToLastNode(self):   #This function is used to add nodes to the end in AddToEnd()
         n = self.firstNode
