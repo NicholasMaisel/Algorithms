@@ -16,15 +16,15 @@ def selectionSort(A):
     global selectionComparisons # Used to count the number of comparisons
     n = len(A)
     j = 0
-    for j in range(j, n-1):
-        smallPos = j
-        for x in range(j+1, n):
+    for q in range(j, n-1):
+        smallPos = q
+        for x in range(q+1, n):
             # Increments comparisons each time one is done, it is before 
             # the inequality, because the inequality may not always be true.
             selectionComparisons += 1
             if A[x] < A[smallPos]:
                 smallPos = x
-        A = swap(A,j,smallPos)  # Calls the swap function
+        A = swap(A,q,smallPos)  # Calls the swap function
     return(A) # Returns tuple of the sorted list and # of comps
 
 
@@ -79,6 +79,8 @@ def quickSort(A):
         return(A)
     else:
         pivotPoint = choice(A)
+        # The block below iterates over the lists and 
+        #chooses which partition values belong in
         for i in A:
             quickComparisons +=2
             if i < pivotPoint:
