@@ -14,32 +14,6 @@ class HashTable():
         #Uses python's built in hash tool to and modding it to chainlength
         return(hash(key)%self.chainLength)
 
-
-    def get(self,key):
-        comparisons = 0
-        flag = False
-        hashedKey = self.hash(key)
-        #See if hash table has a value at hashed index
-        if hashedKey in self.table.keys():
-            selectedLList  = self.table[self.hash(key)] #grabs the linked list to search for element.
-            if selectedLList.firstNode == key:  #COMP?
-                return(key)
-            else:
-                comparisons +=1
-                curNode = selectedLList.firstNode.nextNode
-                # Runs thru the linked list checking if curNode.valueOfNode = key
-                while curNode != key:
-                    if curNode.nextNode != None: #If the current node has a next node, set CurNode equal to it
-                        curNode = curNode.nextNode
-                    else:
-                        break   #if there isnt a next node break out and move on
-                if curNode == key: #ensures that the curNodes value is the value we are looking for
-                    flag = True
-        else:
-            flag = False
-
-        return(flag, comparisons)
-
     def put(self,key):
         hashedKey = self.hash(key)
         if hashedKey in self.table.keys(): #Checks to see if the hash has been used
