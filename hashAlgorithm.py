@@ -62,12 +62,18 @@ def main():
         b.put(i)
         
     totalComparisons =0
-    timesToCheck = 42
+    timesToCheck = 100
     for i in range(timesToCheck):
         found,comparisons = b.get(random.choice(magicitems))
         totalComparisons += comparisons
     
     print("Average Comparisons: ", totalComparisons/timesToCheck)
         
-    
-    return(b)
+        
+        
+#This is used to run stuff only when not called via an import
+#ie. if this module is being used as an import, main will not run
+#however, if it is run directly, main() will be called
+if __name__ == "__main__":
+    main()
+        
