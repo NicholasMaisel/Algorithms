@@ -1,55 +1,81 @@
-from random import random
+import random
+from sortingAlgorithms import mergeSort
+linearComparisons = 0
+binaryComparisons = 0
+individualBinary = 0
+individualLinear = 0
 
 def linearSearch(A, target):
+    global linearComparisons
+    global individualLinear
     location = 0             # Location *is* the comparison count in this instance
-    while location < len(A): #COMP
+    while location < len(A): 
+        individualLinear +=1
+        linearComparisons +=1
         if A[location] == target:
             flag = True
             break
         else:
             flag = False
         location +=1
+    return(flag,)
 
-    if flag == False:
-        location = -1
-    return(flag,location)
 
 
 def binarySearch(A,start,stop,target):
+    global binaryComparisons
+    global individualBinary
     flag = False
     midpoint = int((start + stop)/2)
-    if start > stop:                #COMP
+    binaryComparisons += 1
+    individualBinary += 1
+    if start > stop:                
         flag = False
-        location = -1
-    elif (A[midpoint] == target):   #COMP
+    elif (A[midpoint] == target):
         flag = True
         location = midpoint
-    elif (target < midpoint):       #COMP
+    elif (target < A[midpoint]):
         binarySearch(A,start, midpoint-1, target)
     else:
         binarySearch(A, midpoint+1,stop,target)
 
-    return(flag,midpoint)
+    return(flag)
 
 
+def main():
+    f = open('magicitems.txt',"r")
+    magicitems = list(f)
+    f.close
+    magicitems = [x.strip() for x in magicitems]
+    magicitems = [x.lower() for x in magicitems]
+    magicitems = [x.replace(' ','') for x in magicitems]
+    
+    a = mergeSort(magicitems)
+    
+    
+    timesToCheck = 42
+    randomItems = []
+    for i in range(timesToCheck):
+        randomItems.append(random.choice(a))
+        
+    for i in randomItems:
+        global individualLinear
+        linearSearch(a,i)
+        print("Comparisons Linear Search: ", individualLinear)
+        individualLinear = 0
+        
+    for i in randomItems:
+        global individualBinary
+        binarySearch(a,0,len(a),i)
+        print("Comparisons Binary Search: ", individualBinary)
+        individualBinary = 0
+        
 
-#Warning: this function is designed to work with searches that come back with a
-#true result, the search functions return [-1] if the item is not found.
-def main(A):
-    trials = 100
-    totalComparisonsLinear = 0
-    totalComparisonsBinary = 0
-    for i in range(trials):
-        randomItem = A[round(random()*len(A))-1]
-        totalComparisonsLinear += linearSearch(A,randomItem)[1]
-    print("Avg. comparisons (LinearSearch): ", totalComparisonsLinear/trials)
+    print("-----------------------------------------------")
+    print("Searching Algorithm  |      Comparisons     ")
+    print("---------------------|-------------------------")
+    print("Linear Search: ","     |    ", linearComparisons/timesToCheck)
+    print("Bianry Search: ","     |    ", binaryComparisons/timesToCheck)
+ 
 
-    for i in range(42):
-        randomItem = A[round(random()*len(A))-1]
-        totalComparisonsBinary += binarySearch(A,0,len(A)/2,randomItem)[1]
-
-    print("Avg. comparisons (LinearSearch): ", totalComparisonsBinary/trials )
-
-
-A = [1,2,3,4,5,6,7,8,9]
-main(A)
+main()
