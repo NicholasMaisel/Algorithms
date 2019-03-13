@@ -19,8 +19,8 @@ def selectionSort(A):
     for j in range(j, n-1):
         smallPos = j
         for x in range(j+1, n):
-            # Increments comparisons each time one is done, it is before the
-            # inequality, because the inequality may not always be true.
+            # Increments comparisons each time one is done, it is before 
+            # the inequality, because the inequality may not always be true.
             selectionComparisons += 1
             if A[x] < A[smallPos]:
                 smallPos = x
@@ -103,7 +103,8 @@ def main():
     insertionSort(a)
     selectionSort(a)
     mergeSort(a)
-    quickSort(a,0,len(a)-1) # QuickSort must be last because quickSort sorts in place!!!!!
+    quickSort(a,0,len(a)-1)
+    # QuickSort must be last because quickSort sorts in place!
         
     print("---------------------------------------------")
     print("Sorting Algorithm  |     Comparisons     ")
