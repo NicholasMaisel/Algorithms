@@ -1,5 +1,6 @@
 import random
 from sortingAlgorithms import mergeSort
+
 linearComparisons = 0
 binaryComparisons = 0
 individualBinary = 0
@@ -8,35 +9,35 @@ individualLinear = 0
 def linearSearch(A, target):
     global linearComparisons
     global individualLinear
-    location = 0             # Location *is* the comparison count in this instance
-    while location < len(A): 
-        individualLinear +=1
+    location = 0 # Location is the index of comparison
+    while location < len(A): # Ensures we dont go out of array
+        individualLinear +=1 # Updates counters
         linearComparisons +=1
-        if A[location] == target:
+        if A[location] == target: # Compares values to target
             flag = True
-            break
+            break # Stop if we find the target
         else:
             flag = False
-        location +=1
+        location +=1 # Move onto next index
     return(flag,)
 
 
 
 def binarySearch(A,start,stop,target):
-    global binaryComparisons
+    global binaryComparisons # Gives method access to global var
     global individualBinary
     flag = False
-    midpoint = int((start + stop)/2)
-    binaryComparisons += 1
+    midpoint = int((start + stop)/2) # Sets midpoint to middle
+    binaryComparisons += 1 # Updates counters
     individualBinary += 1
-    if start > stop:                
+    if start > stop: # Makes sure we havent exhausted search       
         flag = False
-    elif (A[midpoint] == target):
+    elif (A[midpoint] == target): # Compares target
         flag = True
         location = midpoint
-    elif (target < A[midpoint]):
-        binarySearch(A,start, midpoint-1, target)
-    else:
+    elif (target < A[midpoint]): # Searches lower 
+        binarySearch(A,start, midpoint-1, target)   
+    else: # Searches upper
         binarySearch(A, midpoint+1,stop,target)
 
     return(flag)
