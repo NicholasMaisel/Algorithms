@@ -1,4 +1,4 @@
-from random import random
+from random import choice
 # These variables are used to count the comparisons
 # They are accessed globally in each sort function 
 quickComparisons = 0
@@ -68,25 +68,28 @@ def insertionSort(A):
             A[j+1] = key # Inserts the value
     return(A)
 
-# The partition method is used to sort the sub arrays in place
-def partition(A, left, right):
-    i = left-1
-    for j in range(left, right): # Iterates over each value in sub array
-        if A[j] <= A[right]:
-            i += 1
-            A[j], A[i] = A[i], A[j] # Essentailly swaps values of A[i] and a[j]
-    A[i+1], A[right] = A[right], A[i+1]
-    return (i+1)
 
 
-def quickSort(A, left, right):
-    global quickComparisons  # Used to referenece the global variable comparisons
-    if left < right:
-        pivot = partition(A, left, right)   
-        quickComparisons += (right - left) # Updates the global variable 
-        quickSort(A, left, pivot-1)
-        quickSort(A, pivot+1, right)
-    return(A)
+def quickSort(A):
+    global quickComparisons
+    left = []
+    pivotList = []
+    right = []
+    if (len(A) <= 1):
+        return(A)
+    else:
+        pivotPoint = choice(A)
+        for i in A:
+            quickComparisons +=2
+            if i < pivotPoint:
+                left.append(i)
+            elif i > pivotPoint:
+                right.append(i)
+            else:
+                pivotList.append(i)
+        leftSide = quickSort(left)
+        rightSide = quickSort(right)
+        return(leftSide + pivotList + rightSide)
 
 
 def main():
@@ -99,11 +102,15 @@ def main():
     magicitems = [x.lower() for x in magicitems]
     magicitems = [x.replace(' ','') for x in magicitems]
     a= magicitems
+    
+    
    
-    insertionSort(a)
-    selectionSort(a)
-    mergeSort(a)
-    quickSort(a,0,len(a)-1)
+    sortingCalls =[insertionSort, selectionSort, mergeSort, quickSort]
+    
+    for algorithm in sortingCalls:
+        algorithm.__call__(a)
+        
+        
     # QuickSort must be last because quickSort sorts in place!
         
     print("---------------------------------------------")
