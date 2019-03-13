@@ -16,20 +16,22 @@ class HashTable():
     
     
     def get(self,key):
+        comparisons = 1     #Accounts for the 'get' part of each comparison
         hashedKey = self.hash(key)
         flag = False
         
         #check to see if the key exists in the hash table
         if hashedKey in self.table.keys():
-            curNode = self.table[hashedKey].firstNode
-            while flag == False:
+            curNode = self.table[hashedKey].firstNode   #start out at the front
+            while flag == False:  #only continue if we havent found the node we are looking for
+                comparisons +=1
                 if curNode.valueOfNode == key:
-                    flag = True
+                    flag = True #if we found the key, this will break out of the while loop
                 elif curNode.nextNode:
-                    curNode = curNode.nextNode
+                    curNode = curNode.nextNode  #if we havent found it lets continue to the nextNode
                 else:
                     break
-        return(flag)
+        return(flag,comparisons)
 
 
     def put(self,key):
@@ -44,7 +46,7 @@ class HashTable():
             
 
 
-
+# The main() function is used to find the average number of comparisons at any timesTo
 def main():
     b = HashTable(255)
     f = open('magicitems.txt',"r")
@@ -58,22 +60,14 @@ def main():
 
     for i in a:
         b.put(i)
-
-
-
-
-    TOTALCOMP = 0
-
-    for i in range(100):
-        rng = round(random.random()*255)
-        print(rng)
-        l, comparisons = b.get(list(b.table.keys())[rng])
-        TOTALCOMP += comparisons
-
-    print(TOTALCOMP/100)
-
-
-
-
-
-main()
+        
+    totalComparisons =0
+    timesToCheck = 42
+    for i in range(timesToCheck):
+        found,comparisons = b.get(random.choice(magicitems))
+        totalComparisons += comparisons
+    
+    print("Average Comparisons: ", totalComparisons/timesToCheck)
+        
+    
+    return(b)
