@@ -6,13 +6,13 @@ ARRAY_LENGTH = 255
 
 
 class HashTable():
-    def __init__(self,chainLength):
-        self.chainLength = chainLength
+    def __init__(self,tableLength):
+        self.tableLength = tableLength
         self.table = {}
 
     def hash(self,key):
-        #Uses python's built in hash tool to and modding it to chainlength
-        return(hash(key)%self.chainLength)
+        #Uses python's built in hash tool to and modding it to tableLength
+        return(hash(key)%self.tableLength)
     
     
     def get(self,key):
