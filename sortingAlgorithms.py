@@ -1,5 +1,8 @@
 from random import random
-Comparisons =1          # This variable will be used as a global variable later
+quickComparisons =1          # This variable will be used as a global variable later
+mergeComparisons = 1
+selectionComparisons =1
+insertionComparisons = 1
 
 def swap(Arr, j, i):
     tempVar = Arr[j]
@@ -8,7 +11,7 @@ def swap(Arr, j, i):
     return(Arr)
 
 def selectionSort(A):
-    comparisons = 0     #used to count the number of comparisons
+    global selectionComparisons    #used to count the number of comparisons
     n = len(A)
     j = 0
     for j in range(j, n-1):
@@ -16,17 +19,20 @@ def selectionSort(A):
         for x in range(j+1, n):
             #increments comparisons each time one is done, it is before the
             #inequality, because the inequality may not always be true.
-            comparisons += 1
+            selectionComparisons += 1
             if A[x] < A[smallPos]:
                 smallPos = x
         A = swap(A,j,smallPos)  # Calls the swap function
-    return(A,comparisons)       # Returns tuple of the sorted list and # of comps
+    return(A)       # Returns tuple of the sorted list and # of comps
+
 
 def merge(left, right):
+    global mergeComparisons 
     sortedList=[] #array to store the sorted list
     i,j=0,0
     while i<len(left) and j<len(right): # ensures we dont go out of list
-        if left[i] < right[j]:          # comparint the unitary lists
+        mergeComparisons +=1 
+        if left[i] < right[j]:          # comparing the unitary lists
             sortedList.append(left[i])
             i+=1                        #Moves to next element in list
         else:
@@ -35,9 +41,10 @@ def merge(left, right):
 
     sortedList+=left[i:]
     sortedList+=right[j:]
-    return (sortedList, comparisons) #tupe of the list and the number of comps
+    return (sortedList) #tupe of the list and the number of comps
 
 def mergeSort(A):
+    
     n = len(A)
     if (n <= 1):
         return(A)
@@ -48,20 +55,23 @@ def mergeSort(A):
     return(merge(left,right))
 
 
+
+
+
 def insertionSort(A):
-    comparisons = 0
+    global insertionComparisons
     for i in range(0,len(A)):
         key = A[i]
         j = i-1
         while j>=0 and key < A[j]:
-            comparisons +=1
+            insertionComparisons +=1
         #this 'waits' until the item is located at a place
         #that the value before it is less than the value
         #after it and inserts the key value at a[j+1]
             A[j+1] = A[j]
             j -= 1
             A[j+1] = key #inserts the value
-    return(A, comparisons)
+    return(A)
 
 #The partition method is used to sort the sub arrays in place
 
@@ -79,14 +89,15 @@ def partition(A, left, right):
 #Therefore we cannot initialize the variable as 0, or each recursion it will
 #be overwritten
 def quickSort(A, left, right):
-    global Comparisons          #used to referenece the global variable comparisons
+    global quickComparisons          #used to referenece the global variable comparisons
     if left < right:
         pivot = partition(A, left, right)
 
-        Comparisons += (right - left)
+        quickComparisons += (right - left)
         quickSort(A, left, pivot-1)
         quickSort(A, pivot+1, right)
-    return(A,Comparisons)
+    return(A)
+
 
 
 
