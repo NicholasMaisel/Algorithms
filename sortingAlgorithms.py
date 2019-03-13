@@ -1,5 +1,7 @@
 from random import random
-quickComparisons =1          # This variable will be used as a global variable later
+# These variables are used to count the comparisons
+# They are accessed globally in each sort function 
+quickComparisons =1
 mergeComparisons = 1
 selectionComparisons =1
 insertionComparisons = 1
@@ -44,12 +46,11 @@ def merge(left, right):
     return (sortedList) #tupe of the list and the number of comps
 
 def mergeSort(A):
-    
     n = len(A)
     if (n <= 1):
         return(A)
     splitPoint = int(n/2)
-    left = mergeSort(A[:splitPoint])
+    left = mergeSort(A[:splitPoint])    # makes left a list with everything up to the splitpoint
     right = mergeSort(A[splitPoint:])
 
     return(merge(left,right))
@@ -59,7 +60,7 @@ def mergeSort(A):
 
 
 def insertionSort(A):
-    global insertionComparisons
+    global insertionComparisons         #used to count comparisons with global variable
     for i in range(0,len(A)):
         key = A[i]
         j = i-1
@@ -74,31 +75,24 @@ def insertionSort(A):
     return(A)
 
 #The partition method is used to sort the sub arrays in place
-
-
-
 def partition(A, left, right):
     i = left-1
     for j in range(left, right): #Iterates over each value in sub array
         if A[j] <= A[right]:
             i += 1
-            A[j], A[i] = A[i], A[j]
+            A[j], A[i] = A[i], A[j]     #essentailly sways values of A[i] and a[j]
     A[i+1], A[right] = A[right], A[i+1]
     return (i+1)
-#The comparisonCounter Variable is used because quickSort is recursive
-#Therefore we cannot initialize the variable as 0, or each recursion it will
-#be overwritten
+
+
 def quickSort(A, left, right):
     global quickComparisons          #used to referenece the global variable comparisons
     if left < right:
-        pivot = partition(A, left, right)
-
-        quickComparisons += (right - left)
+        pivot = partition(A, left, right)   
+        quickComparisons += (right - left)  #updates the global variable 
         quickSort(A, left, pivot-1)
         quickSort(A, pivot+1, right)
     return(A)
-
-
 
 
 def main():
@@ -110,12 +104,20 @@ def main():
     magicitems = [x.strip() for x in magicitems]
     magicitems = [x.lower() for x in magicitems]
     magicitems = [x.replace(' ','') for x in magicitems]
-
-    a = magicitems
-    #a = quickSort(a,0,len(a)-1)
-    a, comparisonCount = quickSort(a,0,len(a)-1)
-
-    print("Comparisons: ", comparisonCount-1)
-
+    a= magicitems
+   
+    insertionSort(a)
+    selectionSort(a)
+    mergeSort(a)
+    quickSort(a,0,len(a)-1) #quickSort must be last because quickSort sorts in place!!!!!
+        
+    print("---------------------------------------------")
+    print("Sorting Algorithm  |     Comparisons     ")
+    print("-------------------|-------------------------")
+    print("Insertion Sort: ","  |    ", insertionComparisons)
+    print("Quick Sort: ","      |    ", quickComparisons)
+    print("Merge Sort: ","      |    ", mergeComparisons)
+    print("Selection Sort:","   |    ", selectionComparisons)
+    print("---------------------------------------------")
 
 main()
