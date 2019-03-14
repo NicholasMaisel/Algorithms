@@ -2,8 +2,6 @@ from LinkedList import LinkedList
 from LinkedList import Node
 import random
 
-ARRAY_LENGTH = 255
-
 
 class HashTable():
     def __init__(self,tableLength):
@@ -23,7 +21,7 @@ class HashTable():
         #check to see if the key exists in the hash table
         if hashedKey in self.table.keys():
             curNode = self.table[hashedKey].firstNode   #start out at the front
-            while flag == False:  #only continue if we havent found the node we are looking for
+            while flag == False:
                 comparisons +=1
                 if curNode.valueOfNode == key:
                     flag = True #if we found the key, this will break out of the while loop
