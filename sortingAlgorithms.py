@@ -15,8 +15,7 @@ def swap(Arr, j, i):
 def selectionSort(A):
     global selectionComparisons # Used to count the number of comparisons
     n = len(A)
-    j = 0
-    for q in range(j, n-1):
+    for q in range(0, n-1):
         smallPos = q
         for x in range(q+1, n):
             # Increments comparisons each time one is done, it is before 
