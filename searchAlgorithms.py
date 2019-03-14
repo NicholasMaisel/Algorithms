@@ -19,7 +19,7 @@ def linearSearch(A, target):
         else:
             flag = False
         location +=1 # Move onto next index
-    return(flag,)
+    return(flag)
 
 
 
