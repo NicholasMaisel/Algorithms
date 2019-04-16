@@ -1,5 +1,4 @@
 from vertex import Vertex
-import Graph
 from graphMatrix import GraphMatrix
 import DFS
 import BFS
@@ -41,6 +40,7 @@ def follow(instructions):
                 graphAdj[separateGraphCount][v1] = [v2]
 
             index += 1
+
     return(graphAdj)
 
 def main():
@@ -49,15 +49,12 @@ def main():
     matricies = []
     linkedObjects = []
 
-
-
     for graph in range(len(MyAdjList)):
         linkedObjects.append([])
 
         # Make graph matricies
         matricies.append(GraphMatrix())
         matricies[graph].makeMatrix(MyAdjList[graph])
-
 
         # Make connected objects
         for i in range(len(MyAdjList[graph])):
@@ -70,15 +67,64 @@ def main():
 
         for vert in MyAdjList[graph]:
             # add corresponding verticies to adjList of Vertex
-            for edge in MyAdjList[graph][vert]:
-                linkedObjects[graph][int(vert)-1].addEdge(linkedObjects[graph][int(edge)-1])
-                linkedObjects[graph][int(edge)-1].addEdge(linkedObjects[graph][int(vert)-1])
+            for vert2 in MyAdjList[graph][vert]:
+                linkedObjects[graph][int(vert)-1].addEdge(linkedObjects[graph][int(vert2)-1])
+                linkedObjects[graph][int(vert2)-1].addEdge(linkedObjects[graph][int(vert)-1])
 
 
-    #for i in linkedObjects[2]:
-    #    print(i.vid, [x.vid for x in i.adjList])
-    #BFS.BFS(linkedObjects[3],'0')
-    DFS.DFS(linkedObjects[3],'1')
+
+
+
+
+    for g in range(len(linkedObjects)):
+        print("\n\nGraph ", g, " BFS Output:")
+        print("__________________________")
+        if '0' in [x.vid for x in linkedObjects[g]]:
+     # Since the last graph is the only graph that starts on vid = 0,
+     # This maintains order when printing the traversal results
+            BFS.Bfs(linkedObjects[g],'0')
+        else:
+            BFS.Bfs(linkedObjects[g],'1')
+
+
+    # Reset Markers
+    for g in range(len(linkedObjects)):
+        for item in linkedObjects[g]:
+            item.unmark()
+
+
+    for g in range(len(linkedObjects)):
+        print("\n\nGraph ", g, " DFS Output:")
+        print("__________________________")
+        if '0' in [x.vid for x in linkedObjects[g]]:
+     # Since the last graph is the only graph that starts on vid = 0,
+     # This maintains order when printing the traversal results
+            DFS.Dfs(linkedObjects[g],'0')
+        else:
+            DFS.Dfs(linkedObjects[g],'1')
+
+    for g in range(len(linkedObjects)):
+        print("\n\nGraph ", g, " Adjacency List:")
+        print("__________________________")
+        for i in linkedObjects[g]:
+            print(i.vid, [x.vid for x in i.adjList])
+
+
+    for mat in matricies:
+        print("\n\nGraph ", g, " Adjacency Matrix:")
+        print('__________________________\n\n\n\n')
+        for line in mat.matrix:
+            print(line)
+
+
+
+
+
+
+
+
+
+
 
 
 
