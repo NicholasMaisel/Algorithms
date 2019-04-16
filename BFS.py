@@ -1,7 +1,16 @@
 from Queue import Queue
 def BFS(graphList, target):
+    target = int(target)-1
     Q = Queue()
-    index = 0
-    Q.enqueue(graphList[target-1]) # Takes the first Vertex and adds it to Queue
-    graphList[target-1].marked = 1  # Marks target
-    
+    Q.enqueue(graphList[target]) # Takes the first Vertex and adds it to Queue
+    graphList[target].marked = 1  # Marks target
+    while Q.isEmpty != False:
+        v = Q.dequeue()
+        if v == None:
+            break
+        print(v.valueOfNode.vid)
+        v.valueOfNode.marked = True
+        for w in v.valueOfNode.adjList:
+            if w.marked == False:
+                w.marked = True
+                Q.enqueue(w)
