@@ -4,5 +4,6 @@ class Vertex:
         self.adjList = []
         self.marked = 0
 
+
     def addEdge(self, vid):
         self.adjList.append(vid) #adds vertex to the adjacency list
