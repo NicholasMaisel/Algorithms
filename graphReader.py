@@ -46,7 +46,6 @@ def follow(instructions):
 def main():
     instructions = readFile()
     MyAdjList = follow(instructions)
-
     matricies = []
     linkedObjects = []
 
@@ -76,9 +75,10 @@ def main():
                 linkedObjects[graph][int(edge)-1].addEdge(linkedObjects[graph][int(vert)-1])
 
 
-    for i in linkedObjects[0]:
-        print(i.vid, [x.vid for x in i.adjList])
-
+    #for i in linkedObjects[2]:
+    #    print(i.vid, [x.vid for x in i.adjList])
+    #BFS.BFS(linkedObjects[3],'0')
+    DFS.DFS(linkedObjects[3],'1')
 
 
 
