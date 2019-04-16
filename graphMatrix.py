@@ -16,3 +16,4 @@ class GraphMatrix:
         for vert in adjacencyList:  # Loops through each vertex
             for connection in adjacencyList[vert]:  # Loops through each adj vertex
                 self.matrix[int(vert)-1][int(connection)-1] = 1  # Updates the matrix with a connection
+                self.matrix[int(connection)-1][int(vert)-1] = 1     
