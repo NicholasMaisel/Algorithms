@@ -73,8 +73,13 @@ def main():
             # add corresponding verticies to adjList of Vertex
             for edge in MyAdjList[graph][vert]:
                 linkedObjects[graph][int(vert)-1].addEdge(linkedObjects[graph][int(edge)-1])
+                linkedObjects[graph][int(edge)-1].addEdge(linkedObjects[graph][int(vert)-1])
 
-    BFS.BFS(linkedObjects[0], '1')
+
+    for i in linkedObjects[0]:
+        print(i.vid, [x.vid for x in i.adjList])
+
+
 
 
 
