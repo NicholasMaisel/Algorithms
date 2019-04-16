@@ -7,3 +7,9 @@ class Vertex:
 
     def addEdge(self, vid):
         self.adjList.append(vid) #adds vertex to the adjacency list
+
+    def mark(self):
+        self.marked = 1
+
+    def unmark(self):
+        self.marked = 0 
