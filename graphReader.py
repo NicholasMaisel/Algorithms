@@ -1,6 +1,9 @@
 from vertex import Vertex
 import Graph
 from graphMatrix import GraphMatrix
+import DFS
+import BFS
+
 def readFile():
     with open('/Users/nicholasmaisel/Documents/Programming/Algorithms/graphs.txt','r') as graphsFile:
         graphs = graphsFile.readlines()
@@ -71,13 +74,7 @@ def main():
             for edge in MyAdjList[graph][vert]:
                 linkedObjects[graph][int(vert)-1].addEdge(linkedObjects[graph][int(edge)-1])
 
-#    print(matricies[0].matrix)
-
-    for g in linkedObjects[0]:
-        print(g.vid, ": ")
-        for i in g.adjList:
-            print(i.vid)
-
+    BFS.BFS(linkedObjects[0], '1')
 
 
 
