@@ -4,5 +4,4 @@ def Dfs(graphList, target):
     print(graphList[target].vid)
     for w in graphList[target].adjList:
         if not w.marked:
-            #print(w.vid)
             Dfs(graphList,w.vid)
