@@ -4,7 +4,7 @@ def Bfs(graphList, target):
     Q = Queue()
     Q.enqueue(graphList[target]) # Takes the first Vertex and adds it to Queue
     graphList[target].mark()  # Marks target
-    while Q.isEmpty != False:
+    while Q.isEmpty() != True:
         v = Q.dequeue()
         if v == None:
             break
