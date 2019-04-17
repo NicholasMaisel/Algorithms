@@ -1,5 +1,8 @@
 from TreeNode import TreeNode
 
+comparison_count = 0
+
+
 import random
 class BSTree:
     def __init__(self):
@@ -25,9 +28,13 @@ class BSTree:
                 currentNode.right = TreeNode(val)
 
     def findInTree(self, val):
+        global comparison_count
+        comparison_count +=1
         return(self.findTreeNode(self.root,val))
 
     def findTreeNode(self, currentNode, val):
+        global comparison_count
+        comparison_count +=1
         if(currentNode == None):
             return(False)
         elif(val == currentNode.vid):
@@ -57,6 +64,8 @@ def main():
 
     for i in randomItems:
         myTree.findInTree(i)
+
+    print(comparison_count/42)
 
 
 main()
