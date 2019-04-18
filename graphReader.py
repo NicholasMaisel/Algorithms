@@ -72,10 +72,6 @@ def main():
                 linkedObjects[graph][int(vert2)-1].addEdge(linkedObjects[graph][int(vert)-1])
 
 
-
-
-
-
     for g in range(len(linkedObjects)):
         print("\n\nGraph ", g, " BFS Output:")
         print("__________________________")
@@ -110,10 +106,10 @@ def main():
             print(i.vid, [x.vid for x in i.adjList])
 
 
-    for mat in matricies:
-        print("\n\nGraph ", g, " Adjacency Matrix:")
+    for mat in range(len(matricies)):
+        print("\n\nGraph ",mat , " Adjacency Matrix:")
         print('__________________________\n\n\n\n')
-        for line in mat.matrix:
+        for line in matricies[mat].matrix:
             print(line)
 
 
