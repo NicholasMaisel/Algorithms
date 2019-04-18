@@ -1,0 +1,111 @@
+\documentclass{article}
+\usepackage{listings}
+\usepackage{sourcecodepro}
+
+\begin{document}
+\lstset{language=Python}
+\lstset{frame=lines}
+\lstset{label={lst:code_direct}}
+\lstset{basicstyle=\footnotesize\ttfamily}
+\lstset{numbers = left}
+\begin{center}
+\large{Assignment 3}
+\vspace{2mm}
+
+Nicholas Maisel
+\end{center}
+
+\vspace{8mm}
+
+\begin{lstlisting}
+from Queue import Queue
+def Bfs(graphList, target):
+    target = int(target)-1
+    Q = Queue()
+    Q.enqueue(graphList[target]) # Takes the first Vertex and adds it to Queue
+    graphList[target].mark()  # Marks target
+    while Q.isEmpty() != True:
+        v = Q.dequeue()
+        if v == None:
+            break
+        print(v.valueOfNode.vid)
+        v.valueOfNode.mark()
+        for w in v.valueOfNode.adjList:
+            if w.marked == False:
+                w.mark()
+                Q.enqueue(w)
+
+\end{lstlisting}
+\vspace{5mm}
+The run time for the breadth-first traversal is quite easy to understand. If we look at line 5, we see that for each call of the Bfs function, we have to enqueue the target vertex. Line 6 marks the vertex and ensures that the target vertex is marked after it is enqueued. Then, on line 7 we ensure that there are still vertices left in the queue. If there are we continue and find each adjacent vertex and add them to the queue. One of the more important lines, especially when analyzing the run time, is line 15, each time we enqueue a vertex we mark it, ensuring it is not enqueued more than one time. Therefore we know that each node it only visited one time suggesting O(n). The enqueue and dequeue operations are O(1) and therefore in total cost O(V) where V is the number of vertices. And since the algorithm only iterates over the adjacency lists one time each, it take O(E) where E is the number of edges. Therefore, breadth first traversal takes O(E) + O(V) --> O(E + V).
+\vspace{5mm}
+
+
+
+\begin{lstlisting}
+def Dfs(graphList, target):
+    target = int(target)-1
+    graphList[target].mark()
+    print(graphList[target].vid)
+    for w in graphList[target].adjList:
+        if not w.marked:
+            Dfs(graphList,w.vid)
+
+\end{lstlisting}
+\vspace{5mm}
+The run time for the depth-first traversal is very similar to the run time of the breadth-first traversal. The algorithm works by looking at the root node, and finding its adjacent nodes. Then, it takes those nodes and looks at the first one's adjacent nodes, this repeats and can be seen on line 7, where the function calls itself recursively. Since each node is only looked at once, because just like in breadth-first traversal, the nodes are marked once viewed, we can say that the algorithm runs in O(V) where V is the number of vertices. But, we also have to travel along each edge twice when traversing the tree because if we have two nodes (A,B) both nodes have each other in their respective adjacency lists. Therefore we have O(V + 2E), the two because the graph is undirected. But we can simply drop that constant to get O(V + E). 
+
+\vspace{5mm}
+\begin{lstlisting}
+from TreeNode import TreeNode
+import random
+
+comparison_count = 0
+
+class BSTree:
+    def __init__(self):
+        self.root = None
+
+    def treeInsert(self, val):
+        if self.root is None:
+            self.root = TreeNode(val)
+        else:
+            self.insertTreeNode(self.root, val)
+
+    def insertTreeNode(self,currentNode, val):
+        if(val <= currentNode.vid):
+            if(currentNode.left):
+                self.insertTreeNode(currentNode.left, val)
+            else:
+                currentNode.left = TreeNode(val)
+
+        elif(val > currentNode.vid):
+            if(currentNode.right):
+                self.insertTreeNode(currentNode.right, val)
+            else:
+                currentNode.right = TreeNode(val)
+
+    def findInTree(self, val):
+        return(self.findTreeNode(self.root,val))
+
+    def findTreeNode(self, currentNode, val):
+        global comparison_count
+        comparison_count +=1
+        if(currentNode == None):
+            return(False)
+        elif(val == currentNode.vid):
+            return(True)
+        elif(val < currentNode.vid):
+            return(self.findTreeNode(currentNode.left, val))
+        else:
+            return(self.findTreeNode(currentNode.right, val))
+
+\end{lstlisting}
+\vspace{5mm}
+The worst run time for the binary search tree is O(n). The only way this could occur is in the following scenario: Suppose you had a sorted list from least to greatest and began building a binary tree from the first node forward. This would result in a tree that looks like a long list of linked items. If you were to search for the largest value in the tree, you would have to iterate over each node before finally reaching the last node. However, this is a very specific case. If the binary search tree were balanced, meaning there are the same amount of nodes on each side of the tree, than the worst case scenario would be O(log n), because for each level in the binary tree, we split the remaining results by two. 
+
+After using magicitems to create a binary search tree, and searching for 42 randomly selected items, I found that the average number of comparisons required to find each of the items out of 666 items was just 10.19047619047619. While the number is too high to be O(log n), this still makes sense because our tree is unbalanced. 
+
+
+
+\end{document}
