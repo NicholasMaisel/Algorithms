@@ -1,9 +1,8 @@
 from TreeNode import TreeNode
+import random
 
 comparison_count = 0
 
-
-import random
 class BSTree:
     def __init__(self):
         self.root = None
@@ -28,8 +27,6 @@ class BSTree:
                 currentNode.right = TreeNode(val)
 
     def findInTree(self, val):
-        global comparison_count
-        comparison_count +=1
         return(self.findTreeNode(self.root,val))
 
     def findTreeNode(self, currentNode, val):
@@ -44,10 +41,6 @@ class BSTree:
         else:
             return(self.findTreeNode(currentNode.right, val))
 
-
-
-
-
 def main():
     f = open('/Users/nicholasmaisel/Documents/Programming/Algorithms/magicitems.txt',"r")
     magicitems = list(f)
@@ -59,6 +52,7 @@ def main():
 
 
     randomItems = []
+
     for i in range(42):
         randomItems.append(random.choice(magicitems))
 
