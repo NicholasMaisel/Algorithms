@@ -12,4 +12,4 @@ class Vertex:
         self.marked = 1
 
     def unmark(self):
-        self.marked = 0 
+        self.marked = 0
