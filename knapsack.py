@@ -37,16 +37,12 @@ def knapsack(items, capacity):
                 sack[i[0]] = qty
                 capacity -= qty_to_add * price
 
-    if capacity > 0:
-        for i in [x for x in items if x[1][1] > 0]:
-
+        else:
             frac_qty = capacity/price #add the item until full
                 #Add frac_item of item to sack
             capacity -= frac_qty * price
             sack[i[0]] = frac_qty
 
-            if capacity == 0:
-                break
 
     return(sack)
 
@@ -56,7 +52,7 @@ def main():
     sortedItems = sorted(items.items(), key=lambda val: val[1], reverse=True)
 
     print(sortedItems)
-    print(knapsack(sortedItems,43))
+    print(knapsack(sortedItems,45.6))
     '''for cap in capacities:
         print(knapsack(sortedItems,cap))'''
 
