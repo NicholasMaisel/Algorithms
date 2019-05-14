@@ -13,7 +13,8 @@ def read():
         elif 'knapsack capacity' in line[0]:
             capacities.append(int(line[0].split('=')[1].strip()))
 
-    return(items,capacities)
+    sortedItems = sorted(items.items(), key=lambda val: val[1], reverse=True)
+    return(sortedItems,capacities)
 
 
 def knapsack(items, capacity):
@@ -37,31 +38,24 @@ def knapsack(items, capacity):
                 sack[i[0]] = qty
                 capacity -= qty_to_add * price
 
-        else:
+        elif 1 not in [p[1][0] for p in items]:
             frac_qty = capacity/price #add the item until full
                 #Add frac_item of item to sack
             capacity -= frac_qty * price
             sack[i[0]] = frac_qty
 
-
+    for i in sack:
+        sack[i] = round(sack[i],2)
     return(sack)
 
 
 def main():
-    items,capacities = read()
-    sortedItems = sorted(items.items(), key=lambda val: val[1], reverse=True)
+    items, capacities = read()
 
-    print(sortedItems)
-    print(knapsack(sortedItems,45.6))
-    '''for cap in capacities:
-        print(knapsack(sortedItems,cap))'''
+    for cap in capacities:
+        items =read()[0]
+        print(cap, knapsack(items,cap))
+
 
 
 main()
-
-'''
-red [1.0, 4]
-green [2.0, 6]
-blue [5.0, 8]
-orange [9.0, 2]
-[1, 6, 10, 20, 21]'''
