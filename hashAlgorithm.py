@@ -11,13 +11,13 @@ class HashTable():
     def hash(self,key):
         #Uses python's built in hash tool to and modding it to tableLength
         return(hash(key)%self.tableLength)
-    
-    
+
+
     def get(self,key):
         comparisons = 1     #Accounts for the 'get' part of each comparison
         hashedKey = self.hash(key)
         flag = False
-        
+
         #check to see if the key exists in the hash table
         if hashedKey in self.table.keys():
             curNode = self.table[hashedKey].firstNode   #start out at the front
@@ -41,7 +41,7 @@ class HashTable():
             #Linked list, simply make one and set the key to the value of that
             #linked lists's firstNode value
             self.table[hashedKey] = LinkedList(key)
-            
+
 
 
 # The main() function is used to find the average number of comparisons at any timesTo
@@ -58,20 +58,21 @@ def main():
 
     for i in a:
         b.put(i)
-        
+
+    ha = []
     totalComparisons =0
-    timesToCheck = 100
+    timesToCheck = 42
     for i in range(timesToCheck):
         found,comparisons = b.get(random.choice(magicitems))
         totalComparisons += comparisons
-    
+        ha.append(comparisons)
     print("Average Comparisons: ", totalComparisons/timesToCheck)
-        
-        
-        
+
+    return(ha)
+
+
 #This is used to run stuff only when not called via an import
 #ie. if this module is being used as an import, main will not run
 #however, if it is run directly, main() will be called
 if __name__ == "__main__":
     main()
-        

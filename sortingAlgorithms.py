@@ -1,6 +1,6 @@
 from random import choice
 # These variables are used to count the comparisons
-# They are accessed globally in each sort function 
+# They are accessed globally in each sort function
 quickComparisons = 0
 mergeComparisons = 0
 selectionComparisons = 0
@@ -18,7 +18,7 @@ def selectionSort(A):
     for q in range(0, n-1):
         smallPos = q
         for x in range(q+1, n):
-            # Increments comparisons each time one is done, it is before 
+            # Increments comparisons each time one is done, it is before
             # the inequality, because the inequality may not always be true.
             selectionComparisons += 1
             if A[x] < A[smallPos]:
@@ -28,11 +28,11 @@ def selectionSort(A):
 
 
 def merge(left, right):
-    global mergeComparisons 
+    global mergeComparisons
     sortedList=[] # Array used to store the sorted list
     i,j=0,0
     while i<len(left) and j<len(right): # Ensures we dont go out of list
-        mergeComparisons +=1 
+        mergeComparisons +=1
         if left[i] < right[j]:          # Comparing the unitary lists
             sortedList.append(left[i])
             i+=1                        # Moves to next element in list
@@ -50,7 +50,7 @@ def mergeSort(A):
         return(A)
     splitPoint = int(n/2)
     # Defines left as a list with everything up to the splitpoint
-    left = mergeSort(A[:splitPoint]) 
+    left = mergeSort(A[:splitPoint])
     right = mergeSort(A[splitPoint:])
 
     return(merge(left,right))
@@ -78,7 +78,7 @@ def quickSort(A):
         return(A)
     else:
         pivotPoint = choice(A)
-        # The block below iterates over the lists and 
+        # The block below iterates over the lists and
         #chooses which partition values belong in
         for i in A:
             quickComparisons +=2
@@ -103,17 +103,17 @@ def main():
     magicitems = [x.lower() for x in magicitems]
     magicitems = [x.replace(' ','') for x in magicitems]
     a= magicitems
-    
-    
-   
+    b= magicitems
+
+
     sortingCalls =[insertionSort, selectionSort, mergeSort, quickSort]
-    
+
     for algorithm in sortingCalls:
         algorithm.__call__(a)
-        
-        
+
+
     # QuickSort must be last because quickSort sorts in place!
-        
+
     print("---------------------------------------------")
     print("Sorting Algorithm  |     Comparisons     ")
     print("-------------------|-------------------------")
