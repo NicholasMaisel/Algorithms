@@ -25,18 +25,20 @@ class Graph():
             v.d = u.d + self.wEdges[u,v]
             v.p = u
 
-    def ShortestPath(self, G, src, v):
+    def ShortestPath(self, G, src, v, emptyList =[]):
         if src == v:
-            print(src.vid)
+            emptyList.append(src.vid)
         elif v.p == None:
             print("There is no path from:", src.vid, " to: ", v.vid)
         else:
-            self.ShortestPath(self,src,v.p)
+            self.ShortestPath(self,src,v.p,emptyList)
             if v.vid != None:
-                print(v.vid)
+                emptyList.append(v.vid)
+        return(emptyList)
 
 
-    def BellandFord(self,src):
+
+    def BellmanFord(self,src):
         src = self.verticies[int(src)-1]
         self.InitSingleSource(src)
         for vert in range(len(self.verticies)-1):
@@ -47,19 +49,22 @@ class Graph():
             u,v = edge[0], edge[1]
             if v.d > u.d + self.wEdges[u,v]:
                 print("Negative weight cycle detected.")
-                return 0
+                return 1
         for vt in self.verticies:
             print()
-            print('Path from',src.vid, '-->', vt.vid, 'costs:', vt.d)
-            self.ShortestPath(self,src,vt)
-
+            print(f'Path from {src.vid} to {vt.vid} costs: {vt.d}; ', end = '')
+            sPath = self.ShortestPath(self,src,vt,emptyList = [])
+            for i in range(len(sPath)):
+                if i != len(sPath)-1:
+                    print(f' {sPath[i]} ⇒', end = '')
+                else:
+                    print(f' {sPath[i]}')
 
 
 
 def main():
     graphs = []
     graph_index = -1
-
 
     for line in open('/Users/nicholasmaisel/Documents/Programming/Algorithms/graph2.txt','r'):
         line = line.rstrip().split(' ')
@@ -86,8 +91,11 @@ def main():
         else:
             pass
 
+    for g in graphs:
 
-    print(graphs[0].BellandFord(1))
+        print(f'\n\n---------- \nGraph {graphs.index(g)}\n----------')
+        g.BellmanFord(1)
+
 
 
 main()
