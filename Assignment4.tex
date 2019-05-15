@@ -1,0 +1,138 @@
+\documentclass{article}
+\usepackage{listings}
+\usepackage{sourcecodepro}
+
+\begin{document}
+\lstset{language=Python}
+\lstset{frame=lines}
+\lstset{label={lst:code_direct}}
+\lstset{basicstyle=\footnotesize\ttfamily}
+\lstset{numbers = left}
+\begin{center}
+\large{Assignment 3}
+\vspace{2mm}
+
+Nicholas Maisel
+\end{center}
+
+\vspace{8mm}
+
+\begin{lstlisting}
+class Vertex():
+    def __init__(self,vid):
+        self.vid = vid
+        self.d = 0
+        self.p = None
+
+class Graph():
+    def __init__(self):
+        self.verticies = []
+        self.wEdges = {}
+
+    def addEdge(self,u,v,w):
+        self.wEdges[u,v] = w
+
+
+    def InitSingleSource(self,src):
+        #src = self.verticies[int(src)]
+        for vert in self.verticies:
+            vert.d = float('Inf')
+            vert.p = None
+        src.d = 0
+
+    def Relax(self,u,v):
+        if v.d > u.d + self.wEdges[u,v]:
+            v.d = u.d + self.wEdges[u,v]
+            v.p = u
+
+    def ShortestPath(self, G, src, v, emptyList =[]):
+        ''' Finds the shortest path by following the predecessor values of
+            each vertex '''
+        if src == v:
+            emptyList.append(src.vid)
+        elif v.p == None:
+            print("There is no path from:", src.vid, " to: ", v.vid)
+        else:
+            self.ShortestPath(self,src,v.p,emptyList)
+            if v.vid != None:
+                emptyList.append(v.vid)
+        return(emptyList)
+
+
+
+    def BellmanFord(self,src):
+        src = self.verticies[int(src)-1]
+        self.InitSingleSource(src)
+        for vert in range(len(self.verticies)-1):
+            for edge in self.wEdges:
+                u,v = edge[0], edge[1]
+                self.Relax(u,v)
+        for edge in self.wEdges:    # check for negative weight cycles
+            u,v = edge[0], edge[1]
+            if v.d > u.d + self.wEdges[u,v]:
+                print("Negative weight cycle detected.")
+                return 1
+        for vt in self.verticies:  # Print output
+            print()
+            print(f'Path from {src.vid} to {vt.vid} costs: {vt.d}; ', end = '')
+            sPath = self.ShortestPath(self,src,vt,emptyList = [])
+            for i in range(len(sPath)):
+                if i != len(sPath)-1:
+                    print(f' {sPath[i]} ⇒', end = '')
+                else:
+                    print(f' {sPath[i]}')
+
+\end{lstlisting}
+\vspace{5mm}
+After reading the data into the program, the Bellman Ford algorithm is called (line 43). The runtime of the Bellman Ford algorithm is fairly simple to understand. On line 45, we call the InitSingleSource function, which iterates over each vertex once, thus $\theta$(V). Then we make |V| - 1 passes over the edges for the loop starting on line 46, to ensure there are no negative weight cycles. Each pass takes $\theta$(E). Therefore the runtime is O(VE).
+\vspace{5mm}
+
+
+
+\begin{lstlisting}
+def knapsack(itemGen, capacity):
+    sack = {}
+    sackValue = 0
+
+    while capacity > 0:
+
+        try:
+            item = next(itemGen)    # Yield the next value from generator
+            itemName = item[0]
+            itemQty = item[1][1]
+            itemPrice = item[1][0]
+        except:
+            return(sack, sackValue)
+
+        if capacity >= itemQty:
+            sack[itemName] = itemQty #adds all of item[index] qty to sack
+            sackValue += itemQty * itemPrice #adds to sack value
+            capacity -= itemQty #updates cap
+            item[1][1] = 0
+
+        elif capacity < itemQty:
+            sack[itemName] = capacity
+            item[1][1] -= capacity
+            sackValue += capacity * itemPrice
+            capacity = 0
+
+    return(sack, sackValue)
+
+
+def spice_gen(items):
+    ''' The spice_gen is a generator function
+        used to yeild each spice one at a time'''
+    i = 0
+    while i < len(items):
+        yield(items[i])
+        i +=1
+
+
+\end{lstlisting}
+\vspace{5mm}
+The knapsack algorithm runs at O(n), with some restrictions. It is O(n) because we iterate over the items list (length n). Each one of the lines in the while loop starting on line 5, runs in constant time, thus O(n). However, this does not take into account the time it takes to sort the list. If we are including the time it takes to sort the list using python's built in sorted() function (like I do in the program), then the runtime becomes O(nlogn).
+\vspace{5mm}
+
+
+
+\end{document}
