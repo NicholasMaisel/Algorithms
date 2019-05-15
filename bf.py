@@ -66,7 +66,7 @@ def main():
     graphs = []
     graph_index = -1
 
-    for line in open('/Users/nicholasmaisel/Documents/Programming/Algorithms/graph2.txt','r'):
+    for line in open('graph2.txt','r'):
         line = line.rstrip().split(' ')
         if '' in line:
             line.remove('')
