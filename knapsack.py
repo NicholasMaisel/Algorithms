@@ -13,6 +13,7 @@ def read():
         elif 'knapsack capacity' in line[0]:
             capacities.append(int(line[0].split('=')[1].strip()))
 
+    # Orders the spices based on their price
     sortedItems = sorted(items.items(), key=lambda val: val[1], reverse=True)
     return(sortedItems,capacities)
 
@@ -24,7 +25,7 @@ def knapsack(itemGen, capacity):
     while capacity > 0:
 
         try:
-            item = next(itemGen)
+            item = next(itemGen)    # Yield the next value from generator
             itemName = item[0]
             itemQty = item[1][1]
             itemPrice = item[1][0]
@@ -47,6 +48,8 @@ def knapsack(itemGen, capacity):
 
 
 def spice_gen(items):
+    ''' The spice_gen is a generator function
+        used to yeild each spice one at a time'''
     i = 0
     while i < len(items):
         yield(items[i])
