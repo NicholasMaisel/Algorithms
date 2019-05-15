@@ -31,7 +31,7 @@ def knapsack(itemGen, capacity):
         except:
             return(sack, sackValue)
 
-        if capacity > itemQty:
+        if capacity >= itemQty:
             sack[itemName] = itemQty #adds all of item[index] qty to sack
             sackValue += itemQty * itemPrice #adds to sack value
             capacity -= itemQty #updates cap
