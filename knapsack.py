@@ -17,44 +17,52 @@ def read():
     return(sortedItems,capacities)
 
 
-def knapsack(items, capacity):
+def knapsack(itemGen, capacity):
     sack = {}
-    for i in items:
-        if capacity == 0:
-            break
-        price = i[1][0]
-        qty = i[1][1]
+    sackValue = 0
 
-        if price <= capacity:
-            qty_to_add = capacity // price
-            if qty_to_add <= qty:
+    while capacity > 0:
 
-                i[1][1] -= qty_to_add
-                sack[i[0]] = qty_to_add
-                capacity -= qty_to_add * price
-            else:
+        try:
+            item = next(itemGen)
+            itemName = item[0]
+            itemQty = item[1][1]
+            itemPrice = item[1][0]
+        except:
+            return(sack, sackValue)
 
-                i[1][1] -= qty
-                sack[i[0]] = qty
-                capacity -= qty_to_add * price
+        if capacity > itemQty:
+            sack[itemName] = itemQty #adds all of item[index] qty to sack
+            sackValue += itemQty * itemPrice #adds to sack value
+            capacity -= itemQty #updates cap
+            item[1][1] = 0
 
-        elif 1 not in [p[1][0] for p in items]:
-            frac_qty = capacity/price #add the item until full
-                #Add frac_item of item to sack
-            capacity -= frac_qty * price
-            sack[i[0]] = frac_qty
+        elif capacity < itemQty:
+            sack[itemName] = capacity
+            item[1][1] -= capacity
+            sackValue += capacity * itemPrice
+            capacity = 0
 
-    for i in sack:
-        sack[i] = round(sack[i],2)
-    return(sack)
+    return(sack, sackValue)
+
+
+def spice_gen(items):
+    i = 0
+    while i < len(items):
+        yield(items[i])
+        i +=1
 
 
 def main():
     items, capacities = read()
 
     for cap in capacities:
-        items =read()[0]
-        print(cap, knapsack(items,cap))
+        items=read()[0]
+        sg = spice_gen(items)
+        contents, value = knapsack(sg,cap)
+        print(f'The sack with capacity: {cap}, is worth {value} and contains:')
+        for k,v in contents.items():
+            print(f'{v} of {k}')
 
 
 
