@@ -26,6 +26,8 @@ class Graph():
             v.p = u
 
     def ShortestPath(self, G, src, v, emptyList =[]):
+        ''' Finds the shortest path by following the predecessor values of
+            each vertex '''
         if src == v:
             emptyList.append(src.vid)
         elif v.p == None:
@@ -45,12 +47,12 @@ class Graph():
             for edge in self.wEdges:
                 u,v = edge[0], edge[1]
                 self.Relax(u,v)
-        for edge in self.wEdges:
+        for edge in self.wEdges:    # check for negative weight cycles
             u,v = edge[0], edge[1]
             if v.d > u.d + self.wEdges[u,v]:
                 print("Negative weight cycle detected.")
                 return 1
-        for vt in self.verticies:
+        for vt in self.verticies:  # Print output
             print()
             print(f'Path from {src.vid} to {vt.vid} costs: {vt.d}; ', end = '')
             sPath = self.ShortestPath(self,src,vt,emptyList = [])
