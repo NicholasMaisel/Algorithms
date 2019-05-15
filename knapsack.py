@@ -2,7 +2,7 @@
 def read():
     items = {}
     capacities =[]
-    for line in open('/Users/nicholasmaisel/Documents/Programming/Algorithms/spice.txt','r'):
+    for line in open('spice.txt','r'):
 
         line = line.rstrip().split(';')
         line = [x.strip() for x in line]
