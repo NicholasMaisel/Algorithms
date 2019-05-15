@@ -92,7 +92,6 @@ def main():
             pass
 
     for g in graphs:
-
         print(f'\n\n---------- \nGraph {graphs.index(g)}\n----------')
         g.BellmanFord(1)
 
